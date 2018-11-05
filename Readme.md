@@ -54,16 +54,10 @@ Installiere Redis wie [hier](https://wiki.uberspace.de/database:redis) beschrieb
 
 Ab Version 7.2 benötigt Gitlab zudem cmake. Dies ist aber auf Uberspace nicht standardmäßig vorinstalliert!
 
-Abhilfe schaffen wir uns wieder mittels toast:
+Abhilfe schaffen wir uns wieder mittels toast und passen die Paths fuer curl, gcc und openssl an:
 
 ```bash
-toast arm cmake
-```
-
-> Falls toast `cmake` nicht selbst findet, oder die Installation fehlschlägt, lässt sich auch explizit ein Archiv angeben. Mögliche Versionen finden sich [hier](https://cmake.org/files/) (äquivalent zur installation von `git`):
-
-```bash
-toast arm https://cmake.org/files/v3.0/cmake-3.0.2.tar.gz
+ LD_LIBRARY_PATH=/package/host/localhost/gcc-5.2/lib64:/package/host/localhost/curl-7.44.0/lib:/package/host/localhost/openssl-1.0.2h/lib toast arm https://cmake.org/files/v3.0/cmake-3.0.2.tar.gz
 ```
 
 ### Ruby ###
@@ -155,10 +149,17 @@ Neu hinzugekommen ist seit Gitlab 8.0 der so genannte ~~*git-http-server*~~. Die
 
 > Leider ist GO unter CentOS 5 nicht lauffähig! Siehe dazu: [Go auf deinem Uberspace](https://wiki.uberspace.de/development:golang).
 
+
 ```bash
 cd ~
 git clone https://gitlab.com/gitlab-org/gitlab-workhorse.git
 cd gitlab-workhorse
+```
+Im `Makefile` muss die Zeile `GOBUILD := go build -ldflags "-X main.Version=$(VERSION)"`
+mit `GOBUILD := go build -ldflags "-X main.Version=$(VERSION)" -p 1` ersetzt werden. Das `-p 1` sorgt dafuer, dass wir nicht zu viele Dateien waehrend des Kompilierens oeffnen, indem wir die Anzahl der verwendeten Prozessoren auf eins reduzieren.
+
+
+```bash
 make
 ```
 
