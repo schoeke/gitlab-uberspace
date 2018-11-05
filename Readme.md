@@ -562,7 +562,7 @@ Auf dem Uberspace lässt sich node wie in der Anleitung [hier](https://wiki.uber
 
 Nach einem Tutorial von: [Benjamin Milde](http://kobralab.centaurus.uberspace.de/benni/uberspace/blob/master/install.md)
 
-Aktualisierungen, Fehlerbehebungen und Ergänzungen: [Richard Weinhold](https://ricwein.com/u/ricwein)
+Aktualisierungen, Fehlerbehebungen und Ergänzungen: [Richard Weinhold](https://ricwein.com/u/ricwein), [Andrej Schoeke](https://github.com/schoeke)(WIP)
 
 Support und Feedback von: [Gabriel Bretschner](http://kanedo.net), [Christian Raunitschka](http://ch.rauni.me), [Jan Beck](http://jancbeck.com)
 
